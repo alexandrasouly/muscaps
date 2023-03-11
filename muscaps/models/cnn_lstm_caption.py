@@ -50,7 +50,7 @@ class CNNLSTMCaption(nn.Module):
         if not self.teacher_forcing:
             seq_len += 1
         outputs = torch.zeros(batch_size, seq_len,
-                              self.vocab.size).cuda()
+                              self.vocab.size)#.cuda()
 
         for t in range(seq_len):
             if t == 0:

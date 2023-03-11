@@ -116,3 +116,8 @@ This repo reuses some code from the following repos:
 
 ## Contact
 If you have any questions, please get in touch: [i.manco@qmul.ac.uk](i.manco@qmul.ac.uk).
+
+
+
+
+python train.py attention --experiment_id  2023-03-06-17_11_13  --device_num 4

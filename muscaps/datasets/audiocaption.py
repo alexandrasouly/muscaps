@@ -9,7 +9,7 @@ from muscaps.datasets.base_dataset import BaseDataset
 
 class AudioCaptionDataset(BaseDataset):
     def __init__(self, config, dataset_type="train"):
-        super().__init__(config, dataset_type, dataset_name="audiocaption")
+        super().__init__(config, dataset_type, dataset_name="muscaps")
 
         self.dataset_json = os.path.join(
             self._data_dir, "dataset_{}.json".format(self._dataset_type))

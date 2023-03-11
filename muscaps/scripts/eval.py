@@ -28,12 +28,12 @@ class Evaluation:
     def load_dataset(self):
         self.logger.write("Loading dataset")
         dataset_name = self.config.dataset_config.dataset_name
-        if dataset_name == "audiocaption":
-            test_dataset = AudioCaptionDataset(
-                self.config.dataset_config, dataset_type="test")
-        else:
-            raise ValueError(
-                "{} dataset is not supported.".format(dataset_name))
+        # if dataset_name == "audiocaption":
+        test_dataset = AudioCaptionDataset(
+            self.config.dataset_config, dataset_type="test")
+        # else:
+        #     raise ValueError(
+        #         "{} dataset is not supported.".format(dataset_name))
         token_freq_dict = json.load(open(self.logger.vocab_path, 'r'))
         self.vocab = Vocabulary(tokens=None, token_freq=token_freq_dict)
         OmegaConf.update(self.config, "model_config.vocab_size",

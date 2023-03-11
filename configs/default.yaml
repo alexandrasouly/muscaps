@@ -5,7 +5,7 @@ training:
   # Maximum number of epochs
   epochs: 300
   # Device to be used to train the model. Can be "cuda" or "cpu"
-  device: cuda
+  device: cpu
   # Optimizer configuration
   optimizer: adam
   # Learning rate

@@ -77,8 +77,7 @@ class BeamSearchDecoder(TextDecoder):
 
         for t in range(self.max_steps):
             scores = model(audio, audio_len, self.seqs, cap_lens)
-            scores = torch.log_softmax(scores, dim=2)[:, -1, :]
-
+            scores = torch.log_softmax(scores, dim=2,)[:, -1, :]
             scores = self.top_k_scores.expand_as(
                 scores) + scores
 

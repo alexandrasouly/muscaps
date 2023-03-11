@@ -3,7 +3,7 @@
   fusion: early
   loss: cross_entropy
   # Feature Extraction
-  finetune: false
+  finetune: true
   pool_type: avg
   feature_extractor_type: hcnn
   pretrained_version: mtt
@@ -17,5 +17,5 @@
   hidden_dim_decoder: 256
   # Inference
   inference_type: beam_search
-  beam_size: 2
-  max_caption_len: 22
+  beam_size: 4
+  max_caption_len: 80

@@ -35,10 +35,11 @@ class Captioning(Evaluation):
         return predicted_caption
 
     def obtain_predictions(self, save_predictions=True):
-        if os.path.exists(self.predictions_path):
-            predictions, true_captions, audio_paths = json.load(
-                open(self.predictions_path)).values()
-        else:
+        # if os.path.exists(self.predictions_path):
+        #     predictions, true_captions, audio_paths = json.load(
+        #         open(self.predictions_path)).values()
+        # else:
+        if True:
             predictions = []
             true_captions = []
             audio_paths = []
@@ -74,9 +75,10 @@ class Captioning(Evaluation):
 
     def compute_metrics(self):
         predictions, true_captions, _ = self.obtain_predictions()
-        metrics, _ = eval_metrics.evaluate_metrics_from_lists(
-            predictions, true_captions)
-        return metrics
+        print('predictions', predictions)
+        # metrics, _ = eval_metrics.evaluate_metrics_from_lists(
+        #     predictions, true_captions)
+        # return metrics
 
 
 def parse_args():
@@ -98,7 +100,6 @@ def parse_args():
 
 if __name__ == "__main__":
     params = parse_args()
-
     experiment_id = params.experiment_id
     config = OmegaConf.load(os.path.join(
         get_root_dir(), "save/experiments/{}/config.yaml".format(experiment_id)))

@@ -42,7 +42,7 @@ class CNNEncoder(AudioEncoder):
             self.input_length = 3 * 16000
             self.audio_feature_dim = 2097 if self.pretrained_version == "msd" else 753
         if self.pretrained_version is not None:
-            state_dict = torch.load(self.feature_extractor_path)
+            state_dict = torch.load(self.feature_extractor_path, map_location=torch.device('cpu'))
             self.feature_extractor.load_state_dict(
                 state_dict, strict=False)
         if self.pool_type == "avg":

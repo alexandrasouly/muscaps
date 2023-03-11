@@ -1,6 +1,8 @@
 import os
 import time
 import numpy as np
+from muscaps.scripts.caption import Captioning
+from muscaps.utils.text_decoder import BeamSearchDecoder
 from omegaconf import OmegaConf
 
 import torch
@@ -33,13 +35,13 @@ class MusCapsTrainer(BaseTrainer):
     def load_dataset(self):
         self.logger.write("Loading dataset")
         dataset_name = self.config.dataset_config.dataset_name
-        if dataset_name == "audiocaption":
-            train_dataset = AudioCaptionDataset(self.config.dataset_config)
-            val_dataset = AudioCaptionDataset(
-                self.config.dataset_config, "val")
-        else:
-            raise ValueError(
-                "{} dataset is not supported.".format(dataset_name))
+        # if dataset_name == "audiocaption":
+        train_dataset = AudioCaptionDataset(self.config.dataset_config)
+        val_dataset = AudioCaptionDataset(
+            self.config.dataset_config, "val")
+        # else:
+        #     raise ValueError(
+        #         "{} dataset is not supported.".format(dataset_name))
         self.vocab = train_dataset.vocab
         self.logger.save_vocab(self.vocab.token_freq)
         OmegaConf.update(self.config, "model_config.vocab_size",
@@ -206,7 +208,18 @@ class MusCapsTrainer(BaseTrainer):
             running_loss += loss.item()
 
             n_batches += 1
-
+        # # make a few predictions for this epoch
+        # decoder = BeamSearchDecoder(
+        #         self.vocab, self.config)
+        # orig = self.model.teacher_forcing
+        # self.model.teacher_forcing = False
+        # pred_caption = decoder.decode(
+        #     self.model, audio[:1], audio_len[:1])
+        # print(pred_caption)
+        # pred_caption_decoded = decoder.decode_caption(
+        #                 pred_caption)
+        # print('Predicted:', pred_caption_decoded)
+        # self.model.teacher_forcing = orig
         return running_loss / n_batches
 
     def train_epoch_val(self, data_loader, device, is_training=False):
