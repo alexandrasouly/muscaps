@@ -1,0 +1,7 @@
+.DS_Store
+glove*
+__pycache__
+*.tar.gz
+*.egg-info
+tmp
+/save
