@@ -60,14 +60,14 @@ class AttentionModel(nn.Module):
         audio_len = audio_len // self.audio_encoder.input_length
         audio_feature_mask = torch.arange(max_len).expand(
             len(audio_len), max_len) < audio_len.unsqueeze(1)
-        audio_feature_mask = audio_feature_mask#.to(self.device)#.cuda()
+        audio_feature_mask = audio_feature_mask.cuda()
 
         states = self.init_lstm_states(pooled_audio_embeds)
 
         if self.teacher_forcing:
             seq_len -= 1
 
-        outputs = torch.zeros(self.batch_size, seq_len, self.vocab.size)#.to(self.device)#.cuda()
+        outputs = torch.zeros(self.batch_size, seq_len, self.vocab.size).cuda()
 
         if len(pooled_audio_embeds.size()) == 1:
             pooled_audio_embeds = pooled_audio_embeds.unsqueeze(0)

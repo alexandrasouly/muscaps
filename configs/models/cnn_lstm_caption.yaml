@@ -6,7 +6,7 @@
   finetune: true
   pool_type: avg
   feature_extractor_type: hcnn
-  pretrained_version: mtt
+  pretrained_version: jamendo
   feature_extractor_path: ${env.data_root}/audio_encoders/${model_config.pretrained_version}_${model_config.feature_extractor_type}.pth
   # Encoder
   word_embed_dim: 300
